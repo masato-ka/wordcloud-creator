@@ -59,4 +59,4 @@ workflows:
       - checkout_repository
       - build_and_test:
           requires:
-            - checkout_code
+            - checkout_repository
