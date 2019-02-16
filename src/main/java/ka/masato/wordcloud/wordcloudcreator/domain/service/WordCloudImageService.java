@@ -4,9 +4,11 @@ import ka.masato.wordcloud.wordcloudcreator.domain.repository.RawTextRepository;
 import ka.masato.wordcloud.wordcloudcreator.domain.repository.WordCloudImageRepository;
 import ka.masato.wordcloud.wordcloudcreator.util.WordCloudBuilder;
 import ka.masato.wordcloud.wordcloudcreator.util.WordCounter;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class WordCloudImageService {
 
     private RawTextRepository rawTextRepository;
