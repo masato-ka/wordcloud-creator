@@ -39,7 +39,7 @@ jobs:
           keys:
               - v1-dependencies-{{ checksum "pom.xml" }}
               - v1-dependencies-
-
+      - run: echo $GCLOUD_SERVICE_KEY | base64 -d > /home/circleci/repo/credential.json
       - run: mvn dependency:go-offline
 
       - save_cache:
@@ -48,15 +48,17 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       - run: mvn integration-test
-      - store-test-results:
-          path: target/surfire-reports
+
+      - store_test_results:
+          path: target/surefire-reports
 
 
-workflow:
-  version: 2.1
+
+workflows:
+  version: 2
   test:
     jobs:
-      - cehckout_repository
+      - checkout_repository
       - build_and_test:
           requires:
-            - checkout_code
+            - checkout_repository
