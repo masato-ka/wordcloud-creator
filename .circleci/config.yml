@@ -46,7 +46,7 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-
+      - run: mvn package install
       - run: mvn integration-test
 
       - store_test_results:
