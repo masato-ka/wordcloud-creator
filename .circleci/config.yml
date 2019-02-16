@@ -53,7 +53,7 @@ jobs:
 
 
 workflow:
-  version: 2.1
+  version: 2
   test:
     jobs:
       - cehckout_repository
