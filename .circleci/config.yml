@@ -1,0 +1,62 @@
+version: 2.1
+executors:
+  default:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/repo
+
+
+jobs:
+  checkout_repository:
+    executor: default
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dump
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-repository-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-repository-
+
+      - save_cache:
+          paths:
+            - ~/repo
+          key: v1-repository-{{ .Environment.CIRCLE_SHA1 }}
+
+  build_and_test:
+    executor: default
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dump
+    steps:
+      - restore_cache:
+          keys:
+            - v1-repository-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-repository-
+      - restore_cache:
+          keys:
+              - v1-dependencies-{{ checksum "pom.xml" }}
+              - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run: mvn integration-test
+      - store-test-results:
+          path: target/surfire-reports
+
+
+workflow:
+  version: 2.1
+  test:
+    jobs:
+      - cehckout_repository
+      - build_and_test:
+          requires:
+            - checkout_code
