@@ -17,13 +17,13 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-repository-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-repository-
+            - v1-RawTextRepository-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-RawTextRepository-
 
       - save_cache:
           paths:
             - ~/repo
-          key: v1-repository-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-RawTextRepository-{{ .Environment.CIRCLE_SHA1 }}
 
   build_and_test:
     executor: default
@@ -33,8 +33,8 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - v1-repository-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-repository-
+            - v1-RawTextRepository-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-RawTextRepository-
       - restore_cache:
           keys:
               - v1-dependencies-{{ checksum "pom.xml" }}
