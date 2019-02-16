@@ -52,11 +52,11 @@ jobs:
           path: target/surfire-reports
 
 
-workflow:
+workflows:
   version: 2
   test:
     jobs:
-      - cehckout_repository
+      - checkout_repository
       - build_and_test:
           requires:
             - checkout_code
