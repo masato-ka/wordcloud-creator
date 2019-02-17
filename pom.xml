@@ -10,7 +10,7 @@
     </parent>
     <groupId>ka.masato.wordcloud</groupId>
     <artifactId>wordcloud-creator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <name>wordcloud-creator</name>
     <description>The backend service of KatariCloud</description>
 
