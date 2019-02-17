@@ -40,7 +40,7 @@ jobs:
               - v1-dependencies-{{ checksum "pom.xml" }}
               - v1-dependencies-
       - run: echo $GCLOUD_SERVICE_KEY | base64 -d > /home/circleci/repo/credential.json
-      - run: mvn dependency:go-offline
+      - run: mvn dependency:resolve-plugins dependency:go-offline
 
       - save_cache:
           paths:
