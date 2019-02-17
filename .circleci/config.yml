@@ -34,10 +34,10 @@ jobs:
           keys:
             - v1-RawTextRepository-{{ .Environment.CIRCLE_SHA1 }}
             - v1-RawTextRepository-
-      #      - restore_cache:
-      #          keys:
-      #              - v1-dependencies-{{ checksum "pom.xml" }}
-      #              - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
       - run: echo $GCLOUD_SERVICE_KEY | base64 -d > /home/circleci/repo/credential.json
       - run: mvn dependency:resolve-plugins dependency:go-offline
 

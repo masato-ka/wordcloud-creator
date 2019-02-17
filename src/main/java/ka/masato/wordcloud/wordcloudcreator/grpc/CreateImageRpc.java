@@ -2,9 +2,6 @@ package ka.masato.wordcloud.wordcloudcreator.grpc;
 
 
 import io.grpc.stub.StreamObserver;
-import ka.masato.wordcloud.wordcloudcreator.CreateImageRequest;
-import ka.masato.wordcloud.wordcloudcreator.ImageResponse;
-import ka.masato.wordcloud.wordcloudcreator.WordCloudImageCreatorGrpc;
 import ka.masato.wordcloud.wordcloudcreator.domain.service.WordCloudImageService;
 import org.lognet.springboot.grpc.GRpcService;
 

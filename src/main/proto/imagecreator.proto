@@ -1,10 +1,9 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "ka.masato.wordcloud.wordcloudcreator";
+option java_package = "ka.masato.wordcloud.wordcloudcreator.grpc";
 option java_outer_classname = "WordCloudImageClass";
 
-package grpc;
 
 service WordCloudImageCreator{
     rpc create (CreateImageRequest) returns (ImageResponse);
