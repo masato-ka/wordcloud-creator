@@ -4,6 +4,7 @@ import ka.masato.wordcloud.wordcloudcreator.controller.model.CreateRequest;
 import ka.masato.wordcloud.wordcloudcreator.controller.model.ImageResult;
 import ka.masato.wordcloud.wordcloudcreator.domain.service.WordCloudImageService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,7 +17,7 @@ public class WordCloudImageController {
     }
 
     @PostMapping("/api/v1/images")
-    public ImageResult create(CreateRequest createRequest) {
+    public ImageResult create(@RequestBody CreateRequest createRequest) {
 
         ImageResult imageResult = new ImageResult();
 

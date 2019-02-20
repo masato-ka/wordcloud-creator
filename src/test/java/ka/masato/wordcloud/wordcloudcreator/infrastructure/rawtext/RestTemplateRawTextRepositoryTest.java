@@ -33,6 +33,7 @@ public class RestTemplateRawTextRepositoryTest {
         String testUrl = "http://fhdouafkla.com";
         String responseBody = "<HTML><head></head><body>今日はラーメンが食べたいラーメン。</body></HTML>";
         MockRestServiceServer mockRestServiceServer = MockRestServiceServer.createServer(restTemplate);
+
         mockRestServiceServer.expect(requestTo(testUrl))
                 .andRespond(withSuccess(responseBody, MediaType.TEXT_HTML));
         Optional<String> result = restTemplateRawTextRepository.getRawText(testUrl);

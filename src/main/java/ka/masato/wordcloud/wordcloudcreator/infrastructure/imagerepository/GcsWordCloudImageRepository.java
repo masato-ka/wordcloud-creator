@@ -41,7 +41,7 @@ public class GcsWordCloudImageRepository implements WordCloudImageRepository {
                 .build();
         InputStream is = getInputStream(image).get();
         blobInfo = storage.create(blobInfo, is);
-        return null;
+        return blobInfo.getMediaLink();
     }
 
     @Override

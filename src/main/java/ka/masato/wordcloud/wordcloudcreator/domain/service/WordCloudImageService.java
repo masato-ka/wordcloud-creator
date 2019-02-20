@@ -30,7 +30,7 @@ public class WordCloudImageService {
                 .map((rawText -> wordCounter.countToken(rawText)))
                 .map(dataSet -> wordCloudBuilder.setWidth(width).setHeight(height).setDataSet(dataSet).build())
                 .map(resultImage -> wordCloudImageRepository.saveImage(resultImage));
-        return result.get();
+        return result.get(); //TODO Must be add Error handling.
     }
 
 }
