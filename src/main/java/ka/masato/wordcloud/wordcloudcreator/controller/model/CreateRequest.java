@@ -1,10 +1,27 @@
 package ka.masato.wordcloud.wordcloudcreator.controller.model;
 
-public class CreateRequest {
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
+public class CreateRequest implements Serializable {
 
     private Integer imageId;
-    private String targerUrl;
+
+    @NotNull
+    @Pattern(regexp = "^https?://[a-zA-Z0-9/:%#&~=_!'\\$\\?\\(\\)\\.\\+\\*\\-]+$", message = "{validation.url.message}")
+    private String targetUrl;
+
+    @NotNull
+    @Min(100)
+    @Max(1024)
     private Integer width;
+
+    @NotNull
+    @Min(100)
+    @Max(768)
     private Integer height;
 
     public Integer getImageId() {
@@ -15,12 +32,12 @@ public class CreateRequest {
         this.imageId = imageId;
     }
 
-    public String getTargerUrl() {
-        return targerUrl;
+    public String getTargetUrl() {
+        return targetUrl;
     }
 
-    public void setTargerUrl(String targerUrl) {
-        this.targerUrl = targerUrl;
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
     }
 
     public Integer getWidth() {

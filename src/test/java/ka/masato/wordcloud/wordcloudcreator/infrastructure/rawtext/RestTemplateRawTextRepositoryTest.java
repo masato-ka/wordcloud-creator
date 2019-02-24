@@ -1,10 +1,12 @@
 package ka.masato.wordcloud.wordcloudcreator.infrastructure.rawtext;
 
+import ka.masato.wordcloud.wordcloudcreator.exception.FailedGetRawTextException;
 import ka.masato.wordcloud.wordcloudcreator.exception.KatariCloudFailedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -16,6 +18,7 @@ import java.util.Optional;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RunWith(SpringRunner.class)
@@ -51,11 +54,11 @@ public class RestTemplateRawTextRepositoryTest {
         Optional<String> result = restTemplateRawTextRepository.getRawText(testUrl);
     }
 
-    @Test(expected = KatariCloudFailedException.class)
+    @Test(expected = FailedGetRawTextException.class)
     public void getRawTextAbnormal02() {
-        String testUrl = "http://";
+        String testUrl = "http://hohoho.com";
         MockRestServiceServer mockRestServiceServer = MockRestServiceServer.createServer(restTemplate);
-        mockRestServiceServer.expect(requestTo(testUrl)).andRespond(withSuccess("failed", MediaType.TEXT_HTML));
+        mockRestServiceServer.expect(requestTo(testUrl)).andRespond(withStatus(HttpStatus.NOT_FOUND));
         Optional<String> result = restTemplateRawTextRepository.getRawText(testUrl);
     }
 
